@@ -5,22 +5,28 @@ import { useState } from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 
-export const SingninForm = () => {
+export const SingnupForm = () => {
     const router = useRouter();
+    const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     function handleLogar(){
-        router.replace("/home");
+        router.replace("/signin");
     }
     return(
         <>
             <Input 
-                placeholder="Digite seu e-mail"
-                onChange={t => setEmail(t)}
-                value={email}
+                placeholder="Digite seu nome"
+                onChange={t => setNome(t)}
+                value={nome}
                 />
 
+                <Input 
+                placeholder="Digite seu e-mail"
+                value={email}
+                onChange={t => setEmail(t)}
+                />
                 <Input 
                 password={true}
                 placeholder="Digite sua senha"
@@ -28,7 +34,7 @@ export const SingninForm = () => {
                 onChange={t => setPassword(t)}
                 />
                 <Button
-                 text="Entrar"
+                 text="Criar conta"
                   onClick={handleLogar}
                     size={1}
                   />

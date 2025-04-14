@@ -8,15 +8,22 @@ type Props = {
     placeholder:string;
     value?:string;
     onChange?:(newValue:string) => void;
+    onEnter?:() => void;
     password?:boolean;
     filled?:boolean;
     icon?:IconDefinition;
 }
 
-export const Input = ({placeholder, value, onChange, password, filled, icon}:Props) =>{
+export const Input = ({placeholder, value, onChange, password, filled, icon, onEnter}:Props) =>{
     
     const [sowPassword, setShowPassword] = useState(false);
     
+    function handleKeyUp(event: React.KeyboardEvent<HTMLInputElement>) {
+        if (event.key.toLowerCase() === "enter" && onEnter) {
+            onEnter()
+        }
+    }
+
     return(
         <div className={`has-[:focus]:border-white flex items-center border-2 border-gray-700 h-14 rounded-3xl ${filled ? "bg-gray-700" : ""}`}>
             
@@ -29,6 +36,8 @@ export const Input = ({placeholder, value, onChange, password, filled, icon}:Pro
             placeholder={placeholder}
             onChange={e => onChange && onChange(e.target.value)}  
             value={value}
+            onKeyUp={handleKeyUp}
+            
         />
 
         {password &&
